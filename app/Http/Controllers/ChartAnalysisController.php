@@ -10,9 +10,10 @@ use Spatie\Browsershot\Browsershot;
 use Intervention\Image\Laravel\Facades\Image as ImageFacade; // Intervention v3 facade
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Cache;
 
 class ChartAnalysisController extends Controller
-{
+{    
       public function analyze(Request $request)
     {
         $request->validate([
@@ -138,7 +139,8 @@ ini_set('max_execution_time', 120);
 
 
         $payload = [
-            'model' => 'mistralai/mistral-small-3.2',
+            //'model' => 'mistralai/mistral-small-3.2',
+            'model' => 'gemma-3-27b-it-abliterated',
             'messages' => [
                 ['role' => 'user',
                     'content' => [
@@ -186,6 +188,14 @@ ini_set('max_execution_time', 120);
         return view('upload'); // make sure upload.blade.php exists in resources/views
     }
 
+    public function showLLMDecision()
+    {
+        return response()->json([
+            'lastUpd'     => Cache::get('llmUpdTime', ''),
+            'isBuy'      => Cache::get('isBuy', false)
+        ], 200, [], JSON_UNESCAPED_SLASHES);
+    }
+
     public function analyzeLink(Request $request)
 {
     $validated = $request->validate([
@@ -224,10 +234,13 @@ ini_set('max_execution_time', 120);
 
     // Call Mistral directly with the image path
     $decision = $this->callMistral($savePath);
-
+    // Check if it contains "BUY"
+    Cache::forever('isBuy', str_contains(strtoupper(Str::substr($decision, 0, 3)), 'BUY')); 
+    Cache::forever('llmUpdTime',  now('Asia/Hong_Kong')->format('YmdHis')); 
     // Build public path
     $publicPath = url('storage/charts/' . $basename);
 
+    
     // Return clean JSON with unescaped slashes
     return response()->json([
         'input_url'     => $url,

@@ -2,13 +2,13 @@
 
 return [
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    'paths' => [
+        '*'
+    ],
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => [ 'https://omniwise.altodock.com', 'http://localhost:8080', 'http://localhost:5173', 'http://', 'http://localhost:8000', 'http://127.0.0.1:8000'],
-
-    'allowed_origins_patterns' => [],
+    'allowed_origins' => ['*'],
 
     'allowed_headers' => ['*'],
 
@@ -19,3 +19,4 @@ return [
     'supports_credentials' => true,
 
 ];
+

@@ -1,7 +1,7 @@
 
 <script>
     import axios from 'axios'
-    import {CommonFunc} from '../../../public/js/common.js';
+    import {CommonFunc} from '@/js/common.js';
     import {API_BASE} from '@/js/config.js';
 
     const defaultprofileList = [

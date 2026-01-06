@@ -15,7 +15,7 @@ class UserApiKeySeeder extends Seeder
         // 1. Get a user to attach keys to
         //    (adjust query or create a user if needed)
         $user = DB::table('omni_user')
-            ->where('username', 'Ricky Chow')
+            ->where('username', 'altodock')
             ->first();
 
         if (! $user) {

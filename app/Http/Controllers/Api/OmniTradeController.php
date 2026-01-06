@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Http;
 
 class OmniTradeController extends Controller
 {
-    public function create(Request $req)
+    /**
+     * 1) Create order (buy/sell)
+     */
+    public function create(Request $req, BinanceController $binance)
     {
         $data = $req->validate([
             'symbol'   => ['required','string'],
@@ -21,37 +23,78 @@ class OmniTradeController extends Controller
             'testnet'  => ['nullable','boolean'],
         ]);
 
-        // 產 clientOrderId 讓三方追蹤
+        // Generate a unique clientOrderId for tracking
         $clientOrderId = 'ow_' . Str::uuid()->toString();
+        $req->merge(['clientOrderId' => $clientOrderId]);
 
-        // TODO: 把實際下單交給你現成的 BinanceController 或 service。
-        // 這裡給出最小可運作的範例（依你專案既有取 key 方式）：
-        // 假設你已有方法 getUserBinanceCred($user, $useTestnet) 取 API Key/Secret
-        // 並有一個 TradeService->placeOrder(...) 你可以自行接回去。
+        /**
+         * Delegate directly to your existing BinanceController::trade()
+         * 
+         * That controller already:
+         * - Loads UserApiKey from DB for the authenticated user
+         * - Decrypts secret key
+         * - Calls Binance testnet or live
+         * - Logs to DB if necessary
+         * - Returns real JSON
+         */
+        $response = $binance->trade($req);
 
+        if (is_array($response)) {
+            return response()->json([
+                'clientOrderId' => $clientOrderId,
+                'binance'       => $response,
+            ]);
+        }
+
+        // Add clientOrderId so 3rd-party can track it
         return response()->json([
             'clientOrderId' => $clientOrderId,
-            'status' => 'ACCEPTED', // 原型：接受請求；真實下單結果可在此回傳
-        ], 202);
+            'binance'       => $response->getData(true),
+        ]);
     }
 
+    /**
+     * 2) Show trades (history)
+     */
+    public function trades(Request $req, BinanceController $binance)
+    {
+        // Simply reuse your existing BinanceController::trades()
+        $response = $binance->trades($req);
+
+        return response()->json($response);
+    }
+
+    /**
+     * 3) Get Balance
+     */
+    public function balance(Request $req, BinanceController $binance)
+    {
+        // Reuse your existing BinanceController::balance()
+        $response = $binance->balance($req);
+
+        return response()->json($response);
+    }
+
+    /**
+     * (Optional) show single order by clientOrderId
+     * — if needed you can map clientOrderId to Binance orderId
+     */
     public function show(Request $req, string $clientOrderId)
     {
-        // 原型：回傳假資料；接回你現有的 trades 查詢即可
         return response()->json([
             'clientOrderId' => $clientOrderId,
-            'exchangeOrderId' => null,
-            'status' => 'NEW', // NEW | FILLED | PARTIALLY_FILLED | CANCELED | REJECTED
-            'filledQty' => 0,
-        ]);
+            'message' => 'Lookup by clientOrderId is not implemented yet.'
+        ], 501);
     }
 
+    /**
+     * (Optional) cancel by clientOrderId
+     */
     public function cancel(Request $req, string $clientOrderId)
     {
-        // 原型：示意撤單成功（接回 Binance 真實 cancel 即可）
         return response()->json([
             'clientOrderId' => $clientOrderId,
-            'status' => 'CANCELED',
-        ]);
+            'message' => 'Cancel by clientOrderId is not implemented yet.'
+        ], 501);
     }
 }

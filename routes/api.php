@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\BinanceController;
 use App\Http\Controllers\Api\OmniTradeController;
 use App\Http\Controllers\Api\IndicatorController;
 use App\Http\Controllers\Api\AlgoController;
+use App\Http\Controllers\Api\SolanaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,14 +63,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('funding-balance',         [BinanceController::class, 'fundingBalance']);
         });
 
-        // OmniTrade related endpoints
-        Route::prefix('omnitrade')->group(function () {
-        Route::get('balance',                 [OmniTradeController::class, 'balance']);
-        Route::post('orders',                 [OmniTradeController::class, 'create']);
-        Route::get('orders/{clientOrderId}',  [OmniTradeController::class, 'show']); 
-        Route::post('orders/{clientOrderId}/cancel', [OmniTradeController::class, 'cancel']);
-        });
-
+       
 
 
         // Technical indicators
@@ -77,4 +71,26 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // LLM 決策（1分鐘決策原型）
     Route::post('/v1/algo/decision', [AlgoController::class, 'decide']); // body: {symbol, interval, policy}
+    
+    
+    Route::prefix('omnitrade')->group(function () {
+        Route::get('balance',                 [OmniTradeController::class, 'balance']);
+        Route::post('orders',                 [OmniTradeController::class, 'create']);
+		Route::get('trades', [OmniTradeController::class, 'trades']);
+
+        Route::get('orders/{clientOrderId}',  [OmniTradeController::class, 'show']); 
+        Route::post('orders/{clientOrderId}/cancel', [OmniTradeController::class, 'cancel']);
+        });
 });
+
+
+Route::get('/solana/latest', [SolanaController::class, 'latest']);
+Route::get('/solana/history', [SolanaController::class, 'history']);
+
+ // OmniTrade related endpoints
+ 
+
+ Route::get('/test', function () {
+    return 'API WORKING';
+});
+

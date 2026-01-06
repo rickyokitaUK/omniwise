@@ -7,23 +7,14 @@ export default defineConfig({
   plugins: [
     laravel({
       input: ['resources/css/app.css', 'resources/js/app.js'],
+      buildDirectory: 'build',
       refresh: true,
     }),
     vue(),
   ],
-  base: './',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'resources'),
-    },
-  },
-  build: {
-    outDir: 'public/build',
-    manifest: true,
-    emptyOutDir: true,
-    manifestFileName: 'manifest.json',
-    rollupOptions: {
-      input: 'resources/js/app.js',
     },
   },
 })

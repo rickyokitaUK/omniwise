@@ -2,7 +2,7 @@
 <script>
     import { API_BASE } from '@/js/config.js'
     import axios from 'axios'
-    import {CommonFunc} from '../../../public/js/common.js';
+    import {CommonFunc} from '@/js/common.js';
     import TradeHistory from './orderhistory.vue'; // Import the TradeHistory component
 
     const defaultprofileList = [

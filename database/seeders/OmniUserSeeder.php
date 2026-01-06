@@ -154,6 +154,19 @@ class OmniUserSeeder extends Seeder
                 'modified_by' => 2,
                 'status' => 1,
             ],
+             [
+                'userid' => 12,
+                'username' => 'altodock',
+                'password' => '$2y$12$eZ55kDO0qMH5IT8Y4QMtW.36/WxDkXTThl/aI3j4.tA0x.hmyEuQK',
+                'usercode' => 'altodock',
+                'user_type' => 2,
+                'user_email' => 'altodock@gmail.com',
+                'created_date' => now(),
+                'created_by' => 2,
+                'modified_date' =>  now(),
+                'modified_by' => 2,
+                'status' => 1,
+            ],
         ]);
     }
 }

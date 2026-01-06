@@ -21,6 +21,7 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::get('/upload-form', [ChartAnalysisController::class, 'showForm']);
 Route::post('/analyze-images', [ChartAnalysisController::class, 'analyze']);
 Route::get('/analyze-link', [ChartAnalysisController::class, 'analyzeLink']);
+Route::get('/llm-decision', [ChartAnalysisController::class, 'showLLMDecision']);
 
 Route::get('/auth', function () {
     return view('auth'); // Vue page
@@ -39,10 +40,7 @@ Route::get('/login-test', function () {
 });
 
 
-Route::get('/{any}', function () {
-    return view('app'); // 這裡是你的主 Vue Blade
-})->where('any', '.*');
-    
+
 // Quick server test route (no DB, no auth, no view)
 Route::get('/test', function () {
     return response()->json([

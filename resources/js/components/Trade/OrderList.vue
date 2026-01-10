@@ -1,9 +1,9 @@
 
 <script>
-    import { API_BASE } from '@/js/config.js'
+    import { API_BASE } from '@/js/config/config.js'
     import axios from 'axios'
-    import {CommonFunc} from '@/js/common.js';
-    import TradeHistory from './orderhistory.vue'; // Import the TradeHistory component
+    import {CommonFunc} from '@/js/utils/common.js';
+    import TradeHistory from '../User/orderhistory.vue'; // Import the TradeHistory component
 
     const defaultprofileList = [
           { title: "--default-- (0/0/0)", value: "0,0,0", key: 0 },

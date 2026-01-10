@@ -64,7 +64,7 @@
 </style>
 
 <script>
-   import algomarketinfoView from './MarketInfo.vue';
+   import algomarketinfoView from '../Market/MarketInfo.vue';
 
    // const investingchart = "https://tvc4.forexpros.com/init.php?family_prefix=tvc4&time=1479947567&domain_ID=55&lang_ID=55&timezone_ID=28&pair_ID=8984&interval=60&refresh=4&session=24x7&client=1&user=200995618&width=830&height=800&init_page=live-charts&m_pids=";
    //import {$serverurl} from '../../config.js';

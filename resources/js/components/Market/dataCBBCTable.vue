@@ -90,7 +90,7 @@
 
 <script>
 import axios from 'axios';
-import {API_BASE} from '../config.js';
+import {API_BASE} from '../../config/config.js';
 import cbbcSearchOption from './searchCBBCOptions.vue';
 
 export default {

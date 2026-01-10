@@ -1,0 +1,61 @@
+﻿
+> omnitraderapi@1.0.0 build
+> vite build
+
+[36mvite v6.3.6 [32mbuilding for production...[36m[39m
+transforming...
+npm : [baseline-browser-mapping] The d
+ata in this module is over two months 
+old.  To ensure accurate Baseline data
+, please update: `npm i baseline-brows
+er-mapping@latest -D`
+位於 線路:1 字元:1
++ npm run build > build_log6.txt 2>&1
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpec 
+   ified: ([baseline-brows...ping@la  
+  test -D`:String) [], RemoteExcept   
+ ion
+    + FullyQualifiedErrorId : NativeC 
+   ommandError
+ 
+[32m??[39m 1554 modules transformed.
+rendering chunks...
+computing gzip size...
+[2mpublic/build/[22m[32mmanifest.json                              [39m[1m[2m    4.43 kB[22m[1m[22m[2m ??gzip:   0.72 kB[22m
+[2mpublic/build/[22m[32massets/omnitrader_icon_04_on-DXOBpy4C.png  [39m[1m[2m    4.72 kB[22m[1m[22m
+[2mpublic/build/[22m[32massets/omnitrader_icon_03_on-CYEMAJiZ.png  [39m[1m[2m    4.93 kB[22m[1m[22m
+[2mpublic/build/[22m[32massets/omnitrader_icon_02_on-CN8XA2C6.png  [39m[1m[2m    5.01 kB[22m[1m[22m
+[2mpublic/build/[22m[32massets/omnitrader_icon_01_on-6IIx7RxQ.png  [39m[1m[2m    5.55 kB[22m[1m[22m
+[2mpublic/build/[22m[32massets/omnitrader_icon_04-B2TpZPG5.png     [39m[1m[2m    8.09 kB[22m[1m[22m
+[2mpublic/build/[22m[32massets/omnitrader_icon_03-CZjf2_mt.png     [39m[1m[2m    8.27 kB[22m[1m[22m
+[2mpublic/build/[22m[32massets/omnitrader_icon_05-BVPSty9h.png     [39m[1m[2m    8.33 kB[22m[1m[22m
+[2mpublic/build/[22m[32massets/omnitrader_icon_02-Bi6uLh7R.png     [39m[1m[2m    8.37 kB[22m[1m[22m
+[2mpublic/build/[22m[32massets/omnitrader_icon_05_on-DDXmnEF_.png  [39m[1m[2m    8.58 kB[22m[1m[22m
+[2mpublic/build/[22m[32massets/asset06-DIijIBuR.png                [39m[1m[2m    8.95 kB[22m[1m[22m
+[2mpublic/build/[22m[32massets/omnitrader_icon_01-BBg4yqVe.png     [39m[1m[2m    8.98 kB[22m[1m[22m
+[2mpublic/build/[22m[32massets/asset01-lCnwlMTz.png                [39m[1m[2m    9.03 kB[22m[1m[22m
+[2mpublic/build/[22m[32massets/asset02-C80FCKQI.png                [39m[1m[2m    9.65 kB[22m[1m[22m
+[2mpublic/build/[22m[32massets/asset04-FBN-6eM-.png                [39m[1m[2m   11.40 kB[22m[1m[22m
+[2mpublic/build/[22m[32massets/asset05-DRF-_D-j.png                [39m[1m[2m   11.80 kB[22m[1m[22m
+[2mpublic/build/[22m[32massets/asset03-ib5ugpym.png                [39m[1m[2m   15.63 kB[22m[1m[22m
+[2mpublic/build/[22m[32massets/logo-Wg3j1fOD.jpg                   [39m[1m[2m   35.70 kB[22m[1m[22m
+[2mpublic/build/[22m[32massets/omniweb_bg-CjhryJLu.jpg             [39m[1m[2m  257.81 kB[22m[1m[22m
+[2mpublic/build/[22m[35massets/app-5lyq7yP-.css                    [39m[1m[2m   20.78 kB[22m[1m[22m[2m ??gzip:   4.77 kB[22m
+[2mpublic/build/[22m[35massets/Home-BPdI2kDz.css                   [39m[1m[2m   26.93 kB[22m[1m[22m[2m ??gzip:   4.94 kB[22m
+[2mpublic/build/[22m[35massets/app-Y2gYewgL.css                    [39m[1m[2m  360.55 kB[22m[1m[22m[2m ??gzip:  50.92 kB[22m
+[2mpublic/build/[22m[36massets/Home-B_q8iZG3.js                    [39m[1m[2m  199.43 kB[22m[1m[22m[2m ??gzip:  64.79 kB[22m
+[2mpublic/build/[22m[36massets/app-BFMcMWAm.js                     [39m[1m[33m1,108.92 kB[39m[22m[2m ??gzip: 365.40 kB[22m
+[33m
+(!) Some chunks are larger than 500 kB
+ after minification. Consider:
+- Using dynamic import() to code-split
+ the application
+- Use build.rollupOptions.output.manua
+lChunks to improve chunking: https://r
+ollupjs.org/configuration-options/#out
+put-manualchunks
+- Adjust chunk size limit for this war
+ning via build.chunkSizeWarningLimit.
+[39m
+[32m??built in 41.08s[39m

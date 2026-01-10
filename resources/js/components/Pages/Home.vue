@@ -4,11 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { useStockStore } from '@/js/stores/useStockStore'
 
 // Components
-import tradeView from './TradeView.vue'
-import autoTradeView from './AutoTradeView.vue'
-import orderlist from './OrderList.vue'
-import accPropertiesView from './UserAssetView.vue'
-import accountDetailList from './AccountDetailList.vue'
+import tradeView from '../Trade/TradeView.vue'
+import autoTradeView from '../Trade/AutoTradeView.vue'
+import orderlist from '../Trade/OrderList.vue'
+import accPropertiesView from '../User/UserAssetView.vue'
+import accountDetailList from '../User/AccountDetailList.vue'
 
 // Icons
 import icon01 from '@/assets/images/omnitrader_icon_01.png'

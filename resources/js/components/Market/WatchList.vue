@@ -111,7 +111,7 @@ header{
 </style>
 
 <script>
-import {API_BASE} from '../config.js';
+import {API_BASE} from '../../config/config.js';
 import axios from 'axios'; // Import axios for HTTP requests
 
 const stockListDataDefault ={

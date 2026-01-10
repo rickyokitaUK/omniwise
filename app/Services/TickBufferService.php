@@ -4,11 +4,23 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\DB;
 use App\Models\SolanaTickBatch;
+use App\Services\AlgoPolicyService;
+use App\Services\BinanceService;
+use Illuminate\Support\Facades\Log;
 
 class TickBufferService
 {
     protected array $tickBuffer = [];
     protected int $currentMinute = -1;
+
+    protected AlgoPolicyService $algoPolicy;
+    protected BinanceService $binanceService;
+
+    public function __construct(AlgoPolicyService $algoPolicy, BinanceService $binanceService)
+    {
+        $this->algoPolicy = $algoPolicy;
+        $this->binanceService = $binanceService;
+    }
 
     public function addTick(array $tick): void
     {
@@ -29,7 +41,8 @@ class TickBufferService
 
     protected function flushMinute(int $minute)
     {
-        if (!isset($this->tickBuffer[$minute])) return;
+        if (!isset($this->tickBuffer[$minute]))
+            return;
 
         $ticks = $this->tickBuffer[$minute];
         $count = count($ticks);
@@ -47,10 +60,10 @@ class TickBufferService
 
         // ===== 1. Save tick batch first =====
         $id = DB::table('solana_tick_batches')->insertGetId([
-            'minute'     => $minuteStart,
-            'ticks'      => json_encode($ticks),
+            'minute' => $minuteStart,
+            'ticks' => json_encode($ticks),
             'tick_count' => $count,
-            'close'      => $close,
+            'close' => $close,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -73,9 +86,40 @@ class TickBufferService
         DB::table('solana_tick_batches')
             ->where('id', $id)
             ->update([
-                'ma4' => $ma4,
                 'ma9' => $ma9,
             ]);
+
+        // === ADD THIS TRADING LOGIC ===
+
+        if ($ma4 !== null && $ma9 !== null) {
+            $indicators = [
+                'MA4' => $ma4,
+                'MA9' => $ma9,
+                'Nominal' => $close,
+            ];
+
+            // TODO: Retrieve policy from DB or Config. Example:
+            // $policy = "IF MA4 > MA9 THEN BUY\nIF MA4 < MA9 THEN SELL"; 
+            // For now, you might fetch it from a User's setting or a global config.
+            $policy = "IF MA4 > MA9 THEN BUY\nIF MA4 < MA9 THEN SELL";
+
+            try {
+                $decision = $this->algoPolicy->decide($indicators, $policy);
+
+                if ($decision === 'BUY' || $decision === 'SELL') {
+                    // Define quantity to trade (e.g., fixed amount or percentage of balance)
+                    $quantity = '1.0'; // Example: 1 SOL
+
+                    // Execute Trade
+                    $this->binanceService->placeMarketOrder('SOLUSDT', $decision, $quantity);
+
+                    // Log the trade
+                    Log::info("Auto-Trade Executed: $decision at $close (MA4: $ma4, MA9: $ma9)");
+                }
+            } catch (\Exception $e) {
+                Log::error("Trade execution failed: " . $e->getMessage());
+            }
+        }
 
         unset($this->tickBuffer[$minute]);
     }

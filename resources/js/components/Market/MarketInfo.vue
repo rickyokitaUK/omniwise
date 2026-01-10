@@ -3,8 +3,8 @@
 import { ref, computed, watch } from 'vue'
 import { useMarketData } from '@/js/composables/useMarketData.js'
 import { useFavoriteStocks } from '@/js/composables/useFavouriteStocks.js'
-import orderpanel from './OrderPanel.vue'
-import algoorderpanel from './AlgoOrderPanel.vue'
+import orderpanel from '../Trade/OrderPanel.vue'
+import algoorderpanel from '../Algo/AlgoOrderPanel.vue'
 import { useStockStore } from '@/js/stores/useStockStore'
 
 const props = defineProps({

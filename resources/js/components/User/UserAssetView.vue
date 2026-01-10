@@ -188,7 +188,7 @@
     import { ElRadioButton, ElRadioGroup, ElDatePicker } from 'element-plus';
         import 'element-plus/dist/index.css';
 
-  import { propertiseChart } from '@/js/common.js'; // Import propertiseChart
+  import { propertiseChart } from '@/js/utils/common.js'; // Import propertiseChart
   import { Chart } from 'chart.js';
   
   export default {

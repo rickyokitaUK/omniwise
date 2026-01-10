@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import axios from 'axios'
-import { API_BASE } from '../config.js'
+import { API_BASE } from '../config/config.js'
 
 export function useFavoriteStocks(user) {
   const isFavStock = ref(false)

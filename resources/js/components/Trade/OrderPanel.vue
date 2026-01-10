@@ -183,7 +183,7 @@
 </style>
 
 <script >
-import modalOrderPrompt from './modalOrderPrompt.vue'; // Import the modal component
+import modalOrderPrompt from '../Common/modalOrderPrompt.vue'; // Import the modal component
 
 //For testing
 

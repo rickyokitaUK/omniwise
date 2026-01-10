@@ -98,7 +98,7 @@ async function login() {
        <!-- Logo + Title -->
       <div class="flex items-center mb-6">
         <img
-          src="../../assets/images/logo.jpg"
+          src="@/assets/images/logo.jpg"
           class="w-10 h-10 mr-3"
         />
         <h3 class="text-lg text-white">OmniWeb Trader v2.0</h3>
@@ -135,7 +135,7 @@ async function login() {
 
 <style scoped>
 #appbg {
-  background-image: url("../../assets/images/omniweb_bg.jpg");
+  background-image: url("@/assets/images/omniweb_bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }

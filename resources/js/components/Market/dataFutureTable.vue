@@ -76,7 +76,7 @@
 
 <script>
 import axios from 'axios';
-import {API_BASE} from '../config.js';
+import { API_BASE } from '../../config/config.js';
 
 export default {
   name: 'dataFutureTable',
